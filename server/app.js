@@ -24,6 +24,28 @@ route.get('/',function(req,res){
     res.json({message : "Hello World"})
 })
 
+route.get('/users',(req,res)=>{
+
+var headers = req.headers;
+console.log('Th headers is ',headers.authorization)
+jwt.verify(headers.authorization,'6776',(err,data)=>{
+console.log('Th varifed data is ',data)
+if(err){
+    res.json({err : err})
+}
+if(data){
+    var users = [
+        {name : 'Mohan',age : 21},
+        {name : 'Sohan',age : 22}
+    ]
+    res.json({data : users})
+}
+
+})
+
+    
+})
+
 route.post('/',function(req,res){
     if(req.body.name=="mohan" && req.body.password=="123456"){
 
